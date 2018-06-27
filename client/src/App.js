@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import Home from './Home';
 import Login from './Login';
 
 export default class App extends Component {
@@ -12,17 +13,21 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/">
-          {() => <Redirect from="/" to="/login" />}
-        </Route>
-        <Route path="/login">
-          {() => (
+        <Route
+          exact
+          path="/"
+          render={() => <Home />}
+        />
+        <Route
+          path="/login"
+          render={(props) => (
             <Login
+              {...props}
               token={this.state.token}
               setToken={this.setToken}
             />
           )}
-        </Route>
+        />
       </div>
     );
   }
