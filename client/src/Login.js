@@ -42,6 +42,7 @@ export default class Login extends Component {
       { email, password }
     ).then(res => {
       this.props.setToken(res.data.token);
+      this.props.history.replace('/');
     });
   }
 
