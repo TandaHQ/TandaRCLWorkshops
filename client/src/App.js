@@ -24,7 +24,7 @@ export default class App extends Component {
           path="/login"
           render={(props) => (
             <Login
-              {...props}
+              history={props.history}
               token={this.state.token}
               setToken={this.setToken}
             />
