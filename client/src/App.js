@@ -16,7 +16,12 @@ export default class App extends Component {
           {() => <Redirect from="/" to="/login" />}
         </Route>
         <Route path="/login">
-          {() => <Login />}
+          {() => (
+            <Login
+              token={this.state.token}
+              setToken={this.setToken}
+            />
+          )}
         </Route>
       </div>
     );
