@@ -16,7 +16,9 @@ export default class App extends Component {
         <Route
           exact
           path="/"
-          render={() => <Home />}
+          render={() => this.state.token
+              ? <Home />
+              : <Redirect to="/login" />}
         />
         <Route
           path="/login"
