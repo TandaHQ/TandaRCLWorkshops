@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './styles.module.css';
 
 export default class Login extends Component {
-  state = { signup: false, email: '', password: '', name: '', token: null };
+  state = { signup: false, email: '', password: '', name: '' };
 
   toggleSignup = () => {
     this.setState(state => ({ signup: !state.signup }));
@@ -41,9 +41,7 @@ export default class Login extends Component {
       '/login',
       { email, password }
     ).then(res => {
-      this.setState({
-        token: res.data.token,
-      });
+      this.props.setToken(res.data.token);
     });
   }
 
@@ -96,7 +94,7 @@ export default class Login extends Component {
           Submit
         </button>
 
-        {this.state.token && <p>You're logged in!</p>}
+        {this.props.token && <p>You're logged in!</p>}
       </div>
     );
   }
