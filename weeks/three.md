@@ -30,7 +30,7 @@ To do this you will need to have your app login setup so it successfully retriev
 
 1. Lets define our store in `src/store.js`.
     * The reducer ofcourse will need to take 2 arguments, first being the current state and the second the action. the reducer can for now just return the current state, we can update it later
-    * The stores initial state should be `{ currenUser: null }`
+    * The stores initial state should be `{ currentUser: null }`
 
 2. In the root of our app we should include `Provider` so our component's can connect.
 
