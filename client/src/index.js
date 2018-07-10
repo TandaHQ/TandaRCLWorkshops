@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import axios from 'axios';
 import registerServiceWorker from './registerServiceWorker';
 import styles from './styles.module.css';
 import App from './App';
+import store from './store';
 
 axios.defaults.baseURL = 'http://social.workshops.tanda.co';
 ReactDOM.render(
   <div className={styles.app}>
-    <BrowserRouter>
+    <Provider store={store}>
       <App />
-    </BrowserRouter>
+    </Provider>
   </div>,
   document.getElementById('root')
 );

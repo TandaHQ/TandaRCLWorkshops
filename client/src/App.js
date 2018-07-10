@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Home from './Home';
 import Login from './Login';
 
-export default class App extends Component {
-  state = { token: null }
-
-  setToken = (token) => {
-    this.setState({ token });
-  }
-
+export class App extends Component {
   render() {
     return (
-      <div>
-        <Route
-          exact
-          path="/"
-          render={() => this.state.token
-              ? <Home />
-              : <Redirect to="/login" />}
-        />
-        <Route
-          path="/login"
-          render={(props) => (
-            <Login
-              history={props.history}
-              token={this.state.token}
-              setToken={this.setToken}
-            />
-          )}
-        />
-      </div>
+      <BrowserRouter>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() => this.props.token
+                ? <Home />
+                : <Redirect to="/login" />}
+          />
+          <Route
+            path="/login"
+            render={(props) => (
+              this.props.token
+              ? <Redirect to="/" />
+              : <Login history={props.history} setToken={this.setToken} />
+            )}
+          />
+        </div>
+      </BrowserRouter>
     );
   }
 }
+
+export default connect((state) => ({ token: state.token }))(App);

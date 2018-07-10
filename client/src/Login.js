@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import styles from './styles.module.css';
 
-export default class Login extends Component {
+export class Login extends Component {
   state = { signup: false, email: '', password: '', name: '' };
 
   toggleSignup = () => {
@@ -41,8 +42,17 @@ export default class Login extends Component {
       '/login',
       { email, password }
     ).then(res => {
-      this.props.setToken(res.data.token);
-      this.props.history.replace('/');
+      const { token, ...user } = res.data;
+      this.props.dispatch({
+        type: 'LOGIN',
+        payload: {
+          token,
+          user,
+        },
+      });
+    }).catch(err => {
+      alert(`Something went wrong: ${err.message}`);
+      this.setState({ password: '' });
     });
   }
 
@@ -83,21 +93,20 @@ export default class Login extends Component {
           value={this.state.password}
         />
         <button
-          className={styles.button}
-          onClick={this.toggleSignup}
-        >
-          {this.state.signup ? 'I already have an account' : 'I need to sign up'}
-        </button>
-        <button
           onClick={this.onSubmit}
           className={styles.button}
         >
           Submit
         </button>
-
-        {this.props.token && <p>You're logged in!</p>}
+        <button
+          className={styles.button}
+          onClick={this.toggleSignup}
+        >
+          {this.state.signup ? 'I already have an account' : 'I need to sign up'}
+        </button>
       </div>
     );
   }
 }
 
+export default connect()(Login);
