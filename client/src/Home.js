@@ -18,7 +18,7 @@ export class Home extends Component {
         <p>Hello, {this.props.name}</p>
         <p>Your token: {this.props.token}</p>
         {console.log(this.props.posts)}
-        {this.props.posts ? this.props.posts.map((post, index) => <Post key={index} {...post} />) : <p>Loading Posts...</p>}
+        {this.props.posts ? this.props.posts.map(post => <Post key={post.id} {...post} />) : <p>Loading Posts...</p>}
       </div>
     );
   }
