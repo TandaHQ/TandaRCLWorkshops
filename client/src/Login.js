@@ -42,12 +42,12 @@ export class Login extends Component {
       '/login',
       { email, password }
     ).then(res => {
-      const { token, ...user } = res.data;
+      const { token, ...currentUser } = res.data;
       this.props.dispatch({
         type: 'LOGIN',
         payload: {
           token,
-          user,
+          currentUser,
         },
       });
     }).catch(err => {
